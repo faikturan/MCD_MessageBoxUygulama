@@ -58,12 +58,15 @@ namespace MCD_MessageBoxUygulama
 
         private void EkranListele()
         {
-            throw new NotImplementedException();
+            lstMusteriler.DataSource = sanalDatabase.musteriler;
         }
 
         private void EkranTemizle()
         {
-            throw new NotImplementedException();
+            txtIsim.Text = string.Empty;
+            txtSoyisim.Text = string.Empty;
+            txtEmailAdres.Text = string.Empty;
+            txtTelefonNumara.Text = string.Empty;
         }
 
         private int yeniMusteriEkle(Musteri data)
