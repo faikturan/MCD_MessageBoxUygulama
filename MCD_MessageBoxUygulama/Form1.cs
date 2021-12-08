@@ -16,5 +16,65 @@ namespace MCD_MessageBoxUygulama
         {
             InitializeComponent();
         }
+
+        private void btnYeniKayit_Click(object sender, EventArgs e)
+        {
+            int islemSonuc = yeniMusteriEkle(new Musteri()
+            {
+                id = Guid.NewGuid(),
+                isim = txtIsim.Text,
+                soyisim = txtSoyisim.Text,
+                emailAdres = txtEmailAdres.Text,
+                telefonNumarasi = txtTelefonNumara.Text
+            });
+
+            if (islemSonuc > 0)
+            {
+                DialogResult res = MessageBox.Show("Müşteri ekleme işlemi başarılı, yeni müşteri kaydı eklemek istermisiniz?", "Bilgilendirme", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (res == DialogResult.Yes)
+                {
+                    bildirimCubugu = new NotifyIcon();
+                    bildirimCubugu.BalloonTipText = "Toplam müşteri kayıt adedi : " + sanalDatabase.musteriler.Count.ToString();
+                    bildirimCubugu.BalloonTipTitle = "Müşteri Adet bilgisi";
+                    bildirimCubugu.Visible = true;
+                    bildirimCubugu.Icon = SystemIcons.Information;
+                    bildirimCubugu.ShowBalloonTip(2000);
+                }
+                else if(res == DialogResult.No)
+                {
+
+                }
+
+                EkranTemizle();
+                EkranListele();
+
+            }
+            else
+            {
+                MessageBox.Show("Hata: Kayıt ekleme işlemi yapılamadı.");
+            }
+        }
+
+        private void EkranListele()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void EkranTemizle()
+        {
+            throw new NotImplementedException();
+        }
+
+        private int yeniMusteriEkle(Musteri data)
+        {
+            sanalDatabase.musteriler.Add(data);
+            return 1;
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
